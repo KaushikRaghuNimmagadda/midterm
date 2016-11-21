@@ -13,12 +13,9 @@ This examination is an open-book, open-notes, open-web assessment.  You are welc
 
 The exam will be due by 5pm on Friday December 2nd.
 
-Please submit a single ZIP file via CANVAS containing archival versions of your work (e.g. \*.js files for javascript, \*.py files for python, \*.text or \*.pdf files for text explanations).  
+1. Please submit a single ZIP file via CANVAS containing archival versions of your work (e.g. \*.js files for javascript, \*.py files for python, \*.text or \*.pdf files for text explanations).  You are welcome to also submit any additional handwritten work for all questions; this work may be submitted as a part of the electronic files as a photo JPEG or scanned PDF.
 
-Please also share with me a single Google Drive Folder that contains your submission files and relevant Google Docs/Sheets.  
-
-You are welcome to also submit any additional handwritten work for all questions; this work may be submitted as a part of the electronic files as a photo JPEG or scanned PDF.
-
+2. Please also share with me a single Google Drive Folder that contains your submission files and relevant Google Docs/Sheets.  
 
 # Goal and Context
 You have been hired as an electrical engineer at a new energy non-profit focused on using vechile-to-grid systems for energy storage. The company hopes that developing an open-source vehicle-to-grid solution might encourage local energy companies to subsidize electric vehicles, especially as means to offset natural variations in renewable generation (e.g. solar, tidal, wind). Of course, there will be many economic, political, and social constraints that will determine whether this path is viable. However, as an engineer, you are excited by the challenge of creating such a solution yourself... 
