@@ -72,3 +72,5 @@ Finally, you would like to be able to track changes to your home electricity met
 Please write a python script that:
 
 * a. Searches through an AMR CSV file such as [exampleAMR.csv](exampleAMR.csv) using regular expressions to find the rows associated with a specific `MeterID` (e.g. ID# 14452472), and prints out changes in the `Consumption` together with the associated `TimeStamp` for the changes.
+
+**Note that to get started you will probably want to download the example file using from this link: https://github.com/engn1931z/midterm/raw/master/exampleAMR.csv**
