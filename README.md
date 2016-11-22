@@ -18,7 +18,7 @@ The exam will be due by 5pm on Friday December 2nd.
 2. Please also share with me a single Google Drive Folder that contains your submission files and relevant Google Docs/Sheets.  
 
 # Goal and Context
-You've been hired as an engineer at a new non-profit organization focused on promoting clean energy technology. Your first project is to develop an open-source [vehicle-to-grid](https://en.wikipedia.org/wiki/Vehicle-to-grid) system that can encourage local energy companies to subsidize electric vehicles, especially as a means to offset natural [intermittency of renewable energy sources](https://en.wikipedia.org/wiki/Intermittent_energy_source) (e.g., solar, tidal, wind). Of course, there will be many economic, political, and social constraints that will determine whether this path is viable. However, as an engineer, you are excited by the challenge of creating such a solution yourself.... 
+You've been hired as an engineer at a new non-profit organization focused on promoting clean energy technology. Your first project is to develop an open-source [vehicle-to-grid](https://en.wikipedia.org/wiki/Vehicle-to-grid) system that can encourage local energy companies to subsidize electric vehicles, especially as a means to offset natural [intermittency of renewable energy sources](https://en.wikipedia.org/wiki/Intermittent_energy_source) (e.g., solar, tidal, wind). Of course, there will be many economic, political, social, and technical constraints that will determine whether this path is viable. However, as an engineer, you are excited by the challenge of creating such a solution yourself.... 
 
 Building on your ENGN1931Z experience, you decide to prototype the essential components using three main components: (1) Google Apps Script to log data, (2) On-Board Diagnostic CAN Bus commands to query vehicle information, and (3) Web APIs and Web Scraping to query local energy pricing and sources. The following questions will lead you through several design challenges that you may encounter along the way.
 
@@ -28,21 +28,21 @@ You decide to use Google Sheets to create a web-based data logger where you can 
 
 * a. If a parameter key called `sheet` is included in the request, then the information should be added to the sheet with that name. (If this sheet does not exist yet, your script should programmatically create it.) Otherwise, if the `sheet` parameter is not included, it should post the information to the default sheet called "Sheet1".
 
-* b. The top row of each sheet should be include headers for the data. The first header should be "Timestamp", and the subsequent headers should be added programmatically from the parameter keys. For example, if you pass the parameter (`...?batteryPercentage=80&kwhPrice=15.41`), then you should have headers that include at least "Timestamp", "batteryPercentage", and "kwhPrice". If any of these headers does not yet exist, it should be added by your script to the first empty column.
+* b. The top row of each sheet should include headers for the data. The first header should be "Timestamp", and the subsequent headers should be added programmatically from the parameter keys. For example, if you pass the parameter (`...?batteryPercentage=80&kwhPrice=15.41`), then you should have headers that include at least "Timestamp", "batteryPercentage", and "kwhPrice". If any of these headers does not yet exist, it should be added by your script to the first empty column.
 
 * c. New data should be added to first empty row (i.e. just below the old data) with the values in the appropriate rows (as labeled by the headers above).
 
 **Please include the web app URL in comments at the top of your Apps-Script, and please make sure to include both the Sheet and Apps-Script in your submission folder.**
 
-# Problem 2: CAN-bus OBD-II Queries
+# Problem 2: OBD-II Queries
 
 You want to use a low-cost CAN-bus reader to query relevant vehicle information through [OBD-II PID](https://en.wikipedia.org/wiki/OBD-II_PIDs) requests. To make sure you understand the command syntax, you decide to first query the available [Mode 1 PIDs]() on your own car. 
 
-To do this, you have setup a web app that can send CAN commands to your car, and then returns the CAN response. To simplify the format, your web app commands and responses will always start with a 0-bit followed by an 11-bit address followed by 8 bytes of data. So all commands and responses will be (12+8\*8)=76 bits long. Note that the appropriate 11-bit address for all OBD-II queries is `7DF` in hexadecimal, and a single query may return zero, one, or more responses. (* Note that it may help to look at the [example PID queries and responses information here](https://en.wikipedia.org/wiki/OBD-II_PIDs#CAN_.2811-bit.29_bus_format)*)
+To do this, you have setup a web app that can send CAN commands to your car, and then returns the CAN responses. To simplify the format, your web app commands and responses will always start with a 0-bit followed by an 11-bit address followed by 8 bytes of data. So all commands and responses will be (12+8\*8)=76 bits long. Note that the appropriate 11-bit address for all OBD-II queries is `7DF` in hexadecimal, and a single query may return zero, one, or more responses. (* Note that it may help to look at the [example PID queries and responses information here](https://en.wikipedia.org/wiki/OBD-II_PIDs#CAN_.2811-bit.29_bus_format)*)
 
-** The URL for the simulated OBD system is: goo.gl/ , and you can based your queries as a 76-bit binary string (i.e. 76 zeros or ones)**
+** The URL for the simulated OBD system is: goo.gl/ , and you can base your queries as a 76-bit binary string (i.e. 76 zeros or ones)**
 
-** Note that a single PID query may return zero, one, or more response. Zero means the methods is not supported; one means that only one ECU replied; more than one means that more than one ECU replied.**
+** Note that a single PID query may return zero, one, or more responses. Zero means the method is not supported; one means that only one ECU replied; more than one means that more than one ECU replied.**
 
 Please write a python script that can performs the following actions:
 
@@ -52,3 +52,8 @@ Please write a python script that can performs the following actions:
 
 * c. Query the Control Module Voltage and print value in Volts for each responding module together with the responding module address. (*Hint: these values should be greater than 12 Volts.*)
 
+# Problem 3: 
+
+You also want to track the local price of electricity in real-time so that you know when to buy and sell electricity. Of course, there will be many practical limitations to when and how you can buy and sell, but the real-time locational marginal price (LMP) can provide a good baseline estimate for the rates you might get if you could negotiate a wholesale deal.
+
+Note that the wholesale LMP varies quite dramatically throughout a day, as shown ![Alt text7](/relative/path/to/exampleVariationLMP.png?raw=true)
