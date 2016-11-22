@@ -38,9 +38,9 @@ You decide to use Google Sheets to create a web-based data logger where you can 
 
 You want to use a low-cost CAN-bus reader to query relevant vehicle information through [OBD-II PID](https://en.wikipedia.org/wiki/OBD-II_PIDs) requests. To make sure you understand the command syntax, you decide to first query the available [Mode 1 PIDs]() on your own car. 
 
-To do this, you have setup a web app that can send CAN commands to your car, and then returns the CAN responses. To simplify the format, your web app commands and responses will always start with a 0-bit followed by an 11-bit address followed by 8 bytes of data. So all commands and responses will be (12+8\*8)=76 bits long. Note that the appropriate 11-bit address for all OBD-II queries is `7DF` in hexadecimal, and a single query may return zero, one, or more responses. (* Note that it may help to look at the [example PID queries and responses information here](https://en.wikipedia.org/wiki/OBD-II_PIDs#CAN_.2811-bit.29_bus_format)*)
+To do this, you have setup a web app that can send CAN commands to your car, and then returns the CAN responses. To simplify the format, your web app automatically handles the CAN address and frame process, so that you can send commands as 8 bytes of hexadecimal encoded data. Responses are also returned as 8 bytes of hexadecimal data, but a single query may return zero, one, or two responses from different ECUs. So a response can consist of 0, 8, or 16 bytes of hex-encoded data. (* Note that it may help to look at the [example PID queries and responses information here](https://en.wikipedia.org/wiki/OBD-II_PIDs#CAN_.2811-bit.29_bus_format)*)
 
-**The URL for the simulated OBD system is: goo.gl/ , and you can base your queries as a 76-bit binary string (i.e. 76 zeros or ones)**
+**The URL for the simulated OBD system is: goo.gl/ , and you can base your queries as a hexadecimal encoded 8-byte string (e.g. '1020304050607080')**
 
 **Note that a single PID query may return zero, one, or more responses. Zero means the method is not supported; one means that only one ECU replied; more than one means that more than one ECU replied.**
 
