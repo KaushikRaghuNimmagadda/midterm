@@ -22,3 +22,33 @@ You've been hired as an engineer at a new non-profit organization focused on pro
 
 Building on your ENGN1931Z experience, you decide to prototype the essential components using three main components: (1) Google Apps Script to log data, (2) On-Board Diagnostic CAN Bus commands to query vehicle information, and (3) Web APIs and Web Scraping to query local energy pricing and sources. The following questions will lead you through several design challenges that you may encounter along the way.
 
+# Probelm 1: Web-Based Data Logger
+
+You decide to use Google Sheets to create a web-based data logger where you can pass relevant information using HTTP GET requests. To this end, please deploy a Google-Apps-Script web app that allows anyone on the web (even anonymous users) to post data to a Google Sheet that you have created in Drive.  The web app should have the following functionality:
+
+* a. If a parameter key called `sheet` is included in the request, then the information should be added to the sheet with that name. (If this sheet does not exist yet, your script should programmatically create it.) Otherwise, if the `sheet` parameter is not included, it should post the information to the default sheet called "Sheet1".
+
+* b. The top row of each sheet should be include headers for the data. The first header should be "Timestamp", and the subsequent headers should be added programmatically from the parameter keys. For example, if you pass the parameter (`...?batteryPercentage=80&kwhPrice=15.41`), then you should have headers that include at least "Timestamp", "batteryPercentage", and "kwhPrice". If any of these headers does not yet exist, it should be added by your script to the first empty column.
+
+* c. New data should be added to first empty row (i.e. just below the old data) with the values in the appropriate rows (as labeled by the headers above).
+
+**Please include the web app URL in comments at the top of your Apps-Script, and please make sure to include both the Sheet and Apps-Script in your submission folder.**
+
+# Problem 2: CAN-bus OBD-II Queries
+
+You want to use a low-cost CAN-bus reader to query relevant vehicle information through [OBD-II PID](https://en.wikipedia.org/wiki/OBD-II_PIDs) requests. To make sure you understand the command syntax, you decide to first query the available [Mode 1 PIDs]() on your own car. 
+
+To do this, you have setup a web app that can send CAN commands to your car, and then returns the CAN response. To simplify the format, your web app commands and responses will always start with a 0-bit followed by an 11-bit address followed by 8 bytes of data. So all commands and responses will be (12+8\*8)=76 bits long. Note that the appropriate 11-bit address for all OBD-II queries is `7DF` in hexadecimal, and a single query may return zero, one, or more responses. (* Note that it may help to look at the [example PID queries and responses information here](https://en.wikipedia.org/wiki/OBD-II_PIDs#CAN_.2811-bit.29_bus_format)*)
+
+** The URL for the simulated OBD system is: goo.gl/ , and you can based your queries as a 76-bit binary string (i.e. 76 zeros or ones)**
+
+** Note that a single PID query may return zero, one, or more response. Zero means the methods is not supported; one means that only one ECU replied; more than one means that more than one ECU replied.**
+
+Please write a python script that can performs the following actions:
+
+* a. Finds the supported Mode 01 PIDs by sequentially sending the "supported PIDs" commands (e.g. `00`, `20`, `40`, ... `A0`, `C0`,`E0`) and processing the [bit-encoded responses](https://en.wikipedia.org/wiki/OBD-II_PIDs#Mode_1_PID_00). *NB: You can double check the validity of your code by seeing if the supported PIDs actually work, but you cannot brute force a solution - credit will only be given for correctly parsing the reply data from the Support PID responses.)
+
+* b. Query the Ambient Air Temperature and print value in degrees Celsius
+
+* c. Query the Control Module Voltage and print value in Volts for each responding module together with the responding module address. (*Hint: these values should be greater than 12 Volts.*)
+
