@@ -54,7 +54,7 @@ Please write a python script that can performs the following actions:
 
 # Problem 3: 
 
-You also want to track the local price of electricity in real-time so that you know when to buy and sell electricity. Of course, there will be many practical limitations to when and how you can buy and sell, but the real-time locational marginal price (LMP) can provide a good baseline estimate for the rates you might get if you could negotiate a wholesale deal.
+You also want to track the local price of electricity in real-time so that you know when to buy and sell electricity. Of course, there will be many practical limitations to when and how you can buy and sell, but the real-time locational marginal price (LMP) can provide a good baseline estimate for the rates you might get if you could negotiate a wholesale deal. (Note that we cannot access the real-time bid/ask pricing, because we are not market participants. However, we can see near real-time LMP as a useful metric.)
 
 Note that the wholesale LMP varies quite dramatically throughout a day, as shown below: ![Example LMP Variations](exampleVariationsLMP.PNG?raw=true).
 
