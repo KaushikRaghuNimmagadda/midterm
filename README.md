@@ -40,37 +40,37 @@ You decide to use Google Sheets to create a web-based data logger where you can 
 
 You want to use a low-cost CAN-bus reader to query relevant vehicle information through [OBD-II PID](https://en.wikipedia.org/wiki/OBD-II_PIDs) requests. To make sure you understand the command syntax, you decide to first query the available [Mode 1 PIDs]() on your own car. 
 
-To do this, you have setup a web app that can send CAN commands to your car, and then returns the CAN responses. To simplify the format, your web app automatically handles the CAN address and frame process, so that you can send commands as 8 bytes of hexadecimal encoded data. Responses are also returned as 8 bytes of hexadecimal data, but a single query may return zero, one, or two responses from different ECUs. So a response can consist of 0, 8, or 16 bytes of hex-encoded data. (*Note that it may help to look at the [example PID queries and responses information here](https://en.wikipedia.org/wiki/OBD-II_PIDs#CAN_.2811-bit.29_bus_format)*)
+To do this, you have setup a web app that can send CAN commands to your car, and then returns the CAN responses. To simplify the format, your web app automatically handles the CAN address and frame process, so that you can send commands as 8 bytes of hexadecimal encoded data. Responses are also returned as 8 bytes of hexadecimal data, but a single query may return zero, one, or two responses from different ECUs. So a response can consist of 0, 8, or 16 bytes of hex-encoded data. (*Note that it may help to look at the [example PID query and response information here](https://en.wikipedia.org/wiki/OBD-II_PIDs#CAN_.2811-bit.29_bus_format)*)
 
-**The URL for the simulated OBD system is: `https://script.google.com/macros/s/AKfycbw24E3r_y1Gq3IpFWUZtfx3chNr1uYgz8kKp6DgHx_4dOoKXlM/exec?`, and you can base your queries as a hexadecimal encoded 8-byte string to the parameter `query`(e.g.  `exec?query=1020304050607080`)**
+**The URL for the simulated OBD system is: `https://script.google.com/macros/s/AKfycbw24E3r_y1Gq3IpFWUZtfx3chNr1uYgz8kKp6DgHx_4dOoKXlM/exec?`, and you can pass your queries as a hexadecimal encoded 8-byte string to the parameter `query`(e.g., `.../exec?query=1A20304050607080`)**
 
-Please write a python script that can performs the following actions:
+Please write a python script that performs the following actions:
 
-* a. Finds the supported Mode 01 PIDs by sequentially sending the "supported PIDs" commands (e.g. `00`, `20`, `40`, ... `A0`, `C0`,`E0`) and processing the [bit-encoded responses](https://en.wikipedia.org/wiki/OBD-II_PIDs#Mode_1_PID_00). *NB: You can double check the validity of your code by seeing if the supported PIDs actually work, but you cannot brute force a solution - credit will only be given for correctly parsing the reply data from the Support PID responses.)
+* a. Finds the supported Mode 01 PIDs by sequentially sending the "supported PIDs" commands (e.g. `00`, `20`, `40`, ... `A0`, `C0`,`E0`) as described [here](https://en.wikipedia.org/wiki/OBD-II_PIDs), parses the [bit-encoded responses](https://en.wikipedia.org/wiki/OBD-II_PIDs#Mode_1_PID_00), and writes a list of all supported PIDs to the file `supportedPIDs.txt`. *NB: You can double check the validity of your code by seeing if the supported PIDs actually work, but you cannot brute force a solution - credit will only be given for correctly parsing the reply data from the Support PIDs queries.)
 
-* b. Query the Ambient Air Temperature and print value in degrees Celsius
+* b. Queries the Ambient Air Temperature and prints the value in degrees Celsius.
 
-* c. Query the Control Module Voltage and print value in Volts for each responding module together with the responding module address. (*Hint: these values should be greater than 12 Volts.*)
+* c. Queries the Control Module Voltage and prints the value in Volts for each responding ECU. (*Hint: these values should be greater than 12 Volts.*)
 
 # Problem 3: Real-Time Utility API
 
-You also want to track the local price of electricity in real-time so that you know when to buy and sell electricity. Of course, there will be many practical limitations to when and how you can buy and sell, but the real-time locational marginal price (LMP) can provide a good baseline estimate for the rates you might get if you could negotiate a wholesale deal. (Note that we cannot access the real-time bid/ask pricing, because we are not market participants. However, we can see near real-time LMP as a useful metric.)
+You also want to track the local price of electricity in real-time so that you know when to buy and sell. Of course, there will be many practical limitations to when and how you can buy and sell, but the real-time locational marginal price (LMP) can provide a good baseline estimate for the rates you might get if you could negotiate a wholesale deal. (Note that we cannot access the real-time bid/ask pricing, because we are not market participants. However, we can see near real-time LMP as a useful metric.)
 
 Note that the wholesale LMP varies quite dramatically throughout a day, as shown below: ![Example LMP Variations](exampleVariationsLMP.PNG?raw=true).
 
-Please write a python script that queries the [ISO New England Web Services API](https://webservices.iso-ne.com/docs/v1.1/index.html) to return the following information:
+Please write a python script that queries the [ISO New England Web Services API](https://webservices.iso-ne.com/docs/v1.1/index.html) and returns the following information:
 
-* a. Query and print the Current Five-Minute LMP for the Rhode Island load zone.
-* b. Query the current Fuel Generation Mix, and print out the current percentages of power respectively from Hydro, Solar, and Winds sources. 
+* a. Queries and prints the Current Five-Minute LMP for the Rhode Island load zone.
+* b. Queries the current Fuel Generation Mix, and prints out the current percentages of power respectively from Hydro, Solar, and Wind sources. 
 
 **Note that you will need to check the "ISO Data Feeds" when registering for an [ISO Express Account](https://www.iso-ne.com/isoexpress/web/guest/login), and then use HTTP Basic Authentication within the python requests library to access the API.**
 
 # Problem 4: Smart Meter Reading
 
-Finally, you would like to be able to track changes to your home electricity meter using a wireless [Automated Meter Reading](https://en.wikipedia.org/wiki/Automatic_meter_reading) technology. You find a low-cost software-defined radio (SDR) that can read AMR packets than can log data into a CSV (comma separated value file) such as this example: [exampleAMR.csv](exampleAMR.csv). However, there are lots of smart meters near your home, and they each send out a packet every few seconds. Therefore, you want to filter the data to look only at the packets from your home meter.
+Finally, you would like to be able to track changes to your home electricity meter using  wireless [Automated Meter Reading (AMR)](https://en.wikipedia.org/wiki/Automatic_meter_reading) technology. You find a low-cost software-defined radio (SDR) that can read AMR packets and log data into a comma separated value (CSV) file such as this example: [exampleAMR.csv](exampleAMR.csv). However, there are lots of smart meters near your home, and they each send out a packet every few seconds. Therefore, you want to filter the data to look only at the packets from your home meter with a specific `MeterID`.
 
 Please write a python script that:
 
-* a. Searches through an AMR CSV file such as [exampleAMR.csv](exampleAMR.csv) using regular expressions to find the rows associated with a specific `MeterID` (e.g. ID# 14452472), and prints out changes in the `Consumption` together with the associated `TimeStamp` for the changes.
+* a. Searches through an AMR CSV file such as [exampleAMR.csv](exampleAMR.csv) using regular expressions to find the rows associated with a specific `MeterID` (e.g. ID# 14452472), and prints out changes in the `Consumption` value together with the associated `TimeStamp` for the changes.
 
 **Note that to get started you will probably want to download the example file using from this link: https://github.com/engn1931z/midterm/raw/master/exampleAMR.csv**
