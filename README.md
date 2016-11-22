@@ -4,7 +4,7 @@
 
 This examination is an individual take-home assignment.  You may not discuss the exam or its contents with other persons (including members of the class). 
 
-This examination is an open-book, open-notes, open-web assessment.  You are welcome to use information you may find in books, in your notes, or on the internet; however, *you are **not** allowed to actively solicit information*. For example, you are welcome to look for relevant information on StackExchange, but you *cannnot* post on StackExchange requesting help.  
+This examination is an open-book, open-notes, open-web assessment.  You are welcome to use information you may find in books, in your notes, or on the internet; however, *you are* **not** *allowed to actively solicit information*. For example, you are welcome to look for relevant information on StackExchange, but you **cannnot** post on StackExchange requesting help.  
 
 **Please remember that you may not solicit help from others in any way. This exam must be the product of your own independent work, and all exams will be compared for similarities.**
 
@@ -22,9 +22,9 @@ You've been hired as an engineer at a new non-profit organization focused on pro
 
 Building on your ENGN1931Z experience, you decide to prototype the essential components using three main components: (1) Google Apps Script to log data, (2) On-Board Diagnostic CAN Bus commands to query vehicle information, (3) Web APIs to query local energy pricing and sources, and (4) wireless Automated Meter Readings to monitor electricity flow. The following questions will lead you through several design challenges that you may encounter along the way.
 
-*Please note that the questions below are approximately ordered by difficulty with the most time-consuming questions first. However, all problems are independent, so you may complete the in any order. (I would encourage you to carefully read through all questions before starting.)*
+*Please note that the questions below are approximately ordered by difficulty with the most time-consuming questions first. However, all problems are independent, so you may complete them in any order. Approximate point values are included in the problem headings. (I would encourage you to carefully read through all questions before starting.)*
 
-# Problem 1: Web-Based Data Logger
+# Problem 1: Web-Based Data Logger (35 points)
 
 You decide to use Google Sheets to create a web-based data logger where you can pass relevant information using `HTTP GET` requests. To this end, please deploy a Google-Apps-Script web app that allows anyone on the web (even anonymous users) to post data to a Google Sheet that you have created in Drive.  The web app should have the following functionality:
 
@@ -36,7 +36,7 @@ You decide to use Google Sheets to create a web-based data logger where you can 
 
 **Please include the web app URL in comments at the top of your Apps-Script, and please make sure to include both the Sheet and Apps-Script in your submission folder.**
 
-# Problem 2: OBD-II Queries
+# Problem 2: OBD-II Queries (35 points)
 
 You want to use a low-cost CAN-bus reader to query relevant vehicle information through [OBD-II PID](https://en.wikipedia.org/wiki/OBD-II_PIDs) requests. To make sure you understand the command syntax, you decide to first query the available [Mode 1 PIDs]() on your own car. 
 
@@ -52,7 +52,7 @@ Please write a python script that performs the following actions:
 
 * c. Queries the Control Module Voltage and prints the value in Volts for each responding ECU. (*Hint: these values should be greater than 12 Volts.*)
 
-# Problem 3: Real-Time Utility API
+# Problem 3: Real-Time Utility API (20 points)
 
 You also want to track the local price of electricity in real-time so that you know when to buy and sell. Of course, there will be many practical limitations to when and how you can buy and sell, but the real-time locational marginal price (LMP) can provide a good baseline estimate for the rates you might get if you could negotiate a wholesale deal. (Note that we cannot access the real-time bid/ask pricing, because we are not market participants. However, we can see near real-time LMP as a useful metric.)
 
@@ -65,7 +65,7 @@ Please write a python script that queries the [ISO New England Web Services API]
 
 **Note that you will need to check the "ISO Data Feeds" when registering for an [ISO Express Account](https://www.iso-ne.com/isoexpress/web/guest/login), and then use HTTP Basic Authentication within the python requests library to access the API.**
 
-# Problem 4: Smart Meter Reading
+# Problem 4: Smart Meter Reading (10 points)
 
 Finally, you would like to be able to track changes to your home electricity meter using  wireless [Automated Meter Reading (AMR)](https://en.wikipedia.org/wiki/Automatic_meter_reading) technology. You find a low-cost software-defined radio (SDR) that can read AMR packets and log data into a comma separated value (CSV) file such as this example: [exampleAMR.csv](exampleAMR.csv). However, there are lots of smart meters near your home, and they each send out a packet every few seconds. Therefore, you want to filter the data to look only at the packets from your home meter with a specific `MeterID`.
 
