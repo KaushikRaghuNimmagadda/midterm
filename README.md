@@ -67,8 +67,8 @@ Please write a python script that queries the [ISO New England Web Services API]
 
 # Problem 4: 
 
-Finally, you would like to be able to track changes to your home electricity meter using a wireless [Automated Meter Reading](https://en.wikipedia.org/wiki/Automatic_meter_reading) technology. You find a low-cost software-defined radio (SDR) that can read AMR packets than can log data into a CSV (comma separated value file) such as ![this example](exampleAMR.csv). However, there are lots of smart meters near your home, and they each send out a packet every few seconds. Therefore, you want to filter the data to look only at the packets from your home meter.
+Finally, you would like to be able to track changes to your home electricity meter using a wireless [Automated Meter Reading](https://en.wikipedia.org/wiki/Automatic_meter_reading) technology. You find a low-cost software-defined radio (SDR) that can read AMR packets than can log data into a CSV (comma separated value file) such as this example: [exampleAMR.csv](exampleAMR.csv). However, there are lots of smart meters near your home, and they each send out a packet every few seconds. Therefore, you want to filter the data to look only at the packets from your home meter.
 
 Please write a python script that:
 
-* a. Searches through an AMR CSV file such as ![exampleAMR.csv](exampleAMR.csv) using regular expressions to find the rows associated with a specific `MeterID` (e.g. ID# 14452472), and prints out changes in the `Consumption` together with the associated `TimeStamp` for the changes.
+* a. Searches through an AMR CSV file such as [exampleAMR.csv](exampleAMR.csv) using regular expressions to find the rows associated with a specific `MeterID` (e.g. ID# 14452472), and prints out changes in the `Consumption` together with the associated `TimeStamp` for the changes.
