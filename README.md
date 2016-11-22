@@ -20,7 +20,7 @@ The exam will be due by 5pm on Friday December 2nd.
 # Goal and Context
 You've been hired as an engineer at a new non-profit organization focused on promoting clean energy technology. Your first project is to develop an open-source [vehicle-to-grid](https://en.wikipedia.org/wiki/Vehicle-to-grid) system that can encourage local energy companies to subsidize electric vehicles, especially as a means to offset natural [intermittency of renewable energy sources](https://en.wikipedia.org/wiki/Intermittent_energy_source) (e.g., solar, tidal, wind). Of course, there will be many economic, political, social, and technical constraints that will determine whether this path is viable. However, as an engineer, you are excited by the challenge of creating such a solution yourself.... 
 
-Building on your ENGN1931Z experience, you decide to prototype the essential components using three main components: (1) Google Apps Script to log data, (2) On-Board Diagnostic CAN Bus commands to query vehicle information, and (3) Web APIs and Web Scraping to query local energy pricing and sources. The following questions will lead you through several design challenges that you may encounter along the way.
+Building on your ENGN1931Z experience, you decide to prototype the essential components using three main components: (1) Google Apps Script to log data, (2) On-Board Diagnostic CAN Bus commands to query vehicle information, (3) Web APIs to query local energy pricing and sources, and (4) wireless Automated Meter Readings to monitor electricity flow. The following questions will lead you through several design challenges that you may encounter along the way.
 
 # Probelm 1: Web-Based Data Logger
 
@@ -64,3 +64,11 @@ Please write a python script that queries the [ISO New England Web Services API]
 * b. Query the current Fuel Generation Mix, and print out the current percentages of power from Hydro, Solar, and Winds sources. 
 
 **Note that you will need to check the "ISO Data Feeds" when registering for an [ISO Express Account](https://www.iso-ne.com/isoexpress/web/guest/login), and then use HTTP Basic Authentication within the python requests library to access the API.**
+
+# Problem 4: 
+
+Finally, you would like to be able to track changes to your home electricity meter using a wireless [Automated Meter Reading](https://en.wikipedia.org/wiki/Automatic_meter_reading) technology. You find a low-cost software-defined radio (SDR) that can read AMR packets than can log data into a CSV (comma separated value file) such as ![this example](exampleAMR.csv). However, there are lots of smart meters near your home, and they each send out a packet every few seconds. Therefore, you want to filter the data to look only at the packets from your home meter.
+
+Please write a python script that:
+
+* a. Searches through an AMR CSV file such as ![exampleAMR.csv](exampleAMR.csv) using regular expressions to find the rows associated with a specific `MeterID` (e.g. ID# 14452472), and prints out changes in the `Consumption` together with the associated `TimeStamp` for the changes.
