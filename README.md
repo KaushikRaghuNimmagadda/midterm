@@ -22,11 +22,11 @@ You've been hired as an engineer at a new non-profit organization focused on pro
 
 Building on your ENGN1931Z experience, you decide to prototype the essential components using three main components: (1) Google Apps Script to log data, (2) On-Board Diagnostic CAN Bus commands to query vehicle information, (3) Web APIs to query local energy pricing and sources, and (4) wireless Automated Meter Readings to monitor electricity flow. The following questions will lead you through several design challenges that you may encounter along the way.
 
-*Please note that the questions below are approximately ordered by difficult with the most time-consuming questions first. However, all problems are independent, so you may complete the in any order. (I would encourage you to carefully read through all questions before starting.)*
+*Please note that the questions below are approximately ordered by difficulty with the most time-consuming questions first. However, all problems are independent, so you may complete the in any order. (I would encourage you to carefully read through all questions before starting.)*
 
 # Problem 1: Web-Based Data Logger
 
-You decide to use Google Sheets to create a web-based data logger where you can pass relevant information using HTTP GET requests. To this end, please deploy a Google-Apps-Script web app that allows anyone on the web (even anonymous users) to post data to a Google Sheet that you have created in Drive.  The web app should have the following functionality:
+You decide to use Google Sheets to create a web-based data logger where you can pass relevant information using `HTTP GET` requests. To this end, please deploy a Google-Apps-Script web app that allows anyone on the web (even anonymous users) to post data to a Google Sheet that you have created in Drive.  The web app should have the following functionality:
 
 * a. If a parameter key called `sheet` is included in the request, then the information should be added to the sheet with that name. (If this sheet does not exist yet, your script should programmatically create it.) Otherwise, if the `sheet` parameter is not included, it should post the information to the default sheet called "Sheet1".
 
