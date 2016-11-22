@@ -40,9 +40,9 @@ You want to use a low-cost CAN-bus reader to query relevant vehicle information 
 
 To do this, you have setup a web app that can send CAN commands to your car, and then returns the CAN responses. To simplify the format, your web app commands and responses will always start with a 0-bit followed by an 11-bit address followed by 8 bytes of data. So all commands and responses will be (12+8\*8)=76 bits long. Note that the appropriate 11-bit address for all OBD-II queries is `7DF` in hexadecimal, and a single query may return zero, one, or more responses. (* Note that it may help to look at the [example PID queries and responses information here](https://en.wikipedia.org/wiki/OBD-II_PIDs#CAN_.2811-bit.29_bus_format)*)
 
-** The URL for the simulated OBD system is: goo.gl/ , and you can base your queries as a 76-bit binary string (i.e. 76 zeros or ones)**
+**The URL for the simulated OBD system is: goo.gl/ , and you can base your queries as a 76-bit binary string (i.e. 76 zeros or ones)**
 
-** Note that a single PID query may return zero, one, or more responses. Zero means the method is not supported; one means that only one ECU replied; more than one means that more than one ECU replied.**
+**Note that a single PID query may return zero, one, or more responses. Zero means the method is not supported; one means that only one ECU replied; more than one means that more than one ECU replied.**
 
 Please write a python script that can performs the following actions:
 
@@ -56,4 +56,11 @@ Please write a python script that can performs the following actions:
 
 You also want to track the local price of electricity in real-time so that you know when to buy and sell electricity. Of course, there will be many practical limitations to when and how you can buy and sell, but the real-time locational marginal price (LMP) can provide a good baseline estimate for the rates you might get if you could negotiate a wholesale deal.
 
-Note that the wholesale LMP varies quite dramatically throughout a day, as shown ![Example LMP Variations](exampleVariationsLMP.PNG?raw=true)
+Note that the wholesale LMP varies quite dramatically throughout a day, as shown below: ![Example LMP Variations](exampleVariationsLMP.PNG?raw=true).
+
+Please write a python script that queries the [ISO New England Web Services API](https://webservices.iso-ne.com/docs/v1.1/index.html) to return the following information:
+
+* a. Query and print the Current Five-Minute LMP for the Rhode Island load zone.
+* b. Query the current Fuel Generation Mix, and print out the current percentages of power from Hydro, Solar, and Winds sources. 
+
+**Note that you will need to check the "ISO Data Feeds" when registering for an [ISO Express Account](https://www.iso-ne.com/isoexpress/web/guest/login), and then use HTTP Basic Authentication within the python requests library to access the API.**
