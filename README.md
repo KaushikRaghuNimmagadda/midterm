@@ -61,7 +61,7 @@ Note that the wholesale LMP varies quite dramatically throughout a day, as shown
 Please write a python script that queries the [ISO New England Web Services API](https://webservices.iso-ne.com/docs/v1.1/index.html) to return the following information:
 
 * a. Query and print the Current Five-Minute LMP for the Rhode Island load zone.
-* b. Query the current Fuel Generation Mix, and print out the current percentages of power from Hydro, Solar, and Winds sources. 
+* b. Query the current Fuel Generation Mix, and print out the current percentages of power respectively from Hydro, Solar, and Winds sources. 
 
 **Note that you will need to check the "ISO Data Feeds" when registering for an [ISO Express Account](https://www.iso-ne.com/isoexpress/web/guest/login), and then use HTTP Basic Authentication within the python requests library to access the API.**
 
