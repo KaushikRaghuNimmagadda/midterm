@@ -38,11 +38,11 @@ You decide to use Google Sheets to create a web-based data logger where you can 
 
 # Problem 2: OBD-II Queries (35 points)
 
-You want to use a low-cost CAN-bus reader to query relevant vehicle information through [OBD-II PID](https://en.wikipedia.org/wiki/OBD-II_PIDs) requests. To make sure you understand the command syntax, you decide to first query the available [Mode 1 PIDs]() on your own car. 
+You want to use a low-cost CAN-bus reader to query relevant vehicle information through [OBD-II PID](https://en.wikipedia.org/wiki/OBD-II_PIDs) requests. To make sure you understand the command syntax, you decide to first query the available [Mode 1 PIDs](https://en.wikipedia.org/wiki/OBD-II_PIDs#Mode_01) on your own car. 
 
 To do this, you have setup a web app that can send CAN commands to your car, and then returns the CAN responses. To simplify the format, your web app automatically handles the CAN address and frame process, so that you can send commands as 8 bytes of hexadecimal encoded data. Responses are also returned as 8 bytes of hexadecimal data, but a single query may return zero, one, or two responses from different ECUs. So a response can consist of 0, 8, or 16 bytes of hex-encoded data. (*Note that it may help to look at the [example PID query and response information here](https://en.wikipedia.org/wiki/OBD-II_PIDs#CAN_.2811-bit.29_bus_format)*)
 
-**The URL for the simulated OBD system is: `https://script.google.com/macros/s/AKfycbw24E3r_y1Gq3IpFWUZtfx3chNr1uYgz8kKp6DgHx_4dOoKXlM/exec?`, and you can pass your queries as a hexadecimal encoded 8-byte string to the parameter `query`(e.g., `.../exec?query=1A20304050607080`)**
+**The URL for the simulated OBD system is: https://script.google.com/macros/s/AKfycbw24E3r_y1Gq3IpFWUZtfx3chNr1uYgz8kKp6DgHx_4dOoKXlM/exec?, and you can pass your queries as a hexadecimal encoded 8-byte string to the parameter `query`(e.g., `.../exec?query=1A20304050607080`)**
 
 Please write a python script that performs the following actions:
 
